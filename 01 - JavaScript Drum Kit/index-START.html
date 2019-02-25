@@ -47,7 +47,9 @@
     </div>
   </div>
 
-  <audio data-key="65" src="sounds/clap.wav"></audio>
+  
+
+  <audio data-key="65" src="sounds/07 - Amazing Grace (My Chains Are Gone).mp3"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
   <audio data-key="68" src="sounds/kick.wav"></audio>
   <audio data-key="70" src="sounds/openhat.wav"></audio>
@@ -59,13 +61,23 @@
 
 <script>
 
+let isPlaying = false;
 function playSound (e) {
+  
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
   if(!audio) return; //stop the funcion
-  audio.currentTime = 0;
+ audio.currentTime = 0;
+ if(isPlaying) {
+   audio.pause()
+   isPlaying = false;
+ } else {
   audio.play();
   key.classList.add('playing');
+  audio.onplaying = function(){
+    isPlaying = true;
+  }
+}
 }
 
 function removeTransition(e) {
